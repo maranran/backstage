@@ -1,0 +1,89 @@
+<template>
+    <div class="container">
+        <h3>订单到哪儿了</h3>
+        <order-filter @search="searchOrder" ></order-filter>
+        <el-table
+                border
+                :data="tableData"
+                style="width: 100%">
+            <el-table-column
+                    prop="user"
+                    label="姓名"
+                    width="80"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="good"
+                    label="物品"
+                    width="120"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="remark"
+                    label="备注"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="orderId"
+                    label="快递单号"
+            >
+            </el-table-column>
+            <el-table-column
+                    label="状态"
+                    width="70"
+            >
+                <template slot-scope="scope">
+                    {{ scope.row.status === 0 ? '待发货': scope.row.status === 1 ? '已发货': '已收货'}}
+                </template>
+            </el-table-column>
+            <el-table-column
+                    fixed="right"
+                    label="操作"
+                    width="220"
+            >
+                <template slot-scope="scope">
+                    <router-link :to="`/detail/${scope.row.objectId}`"><el-button  size="mini">查看</el-button></router-link>
+                    <router-link :to="`/edit/${scope.row.objectId}`"><el-button  size="mini">编辑</el-button></router-link>
+                    <el-button type="primary" size="mini" v-if="scope.row.status === 0" @click="changeStatus(scope.row, 1)">发货</el-button>
+                    <el-button type="success" size="mini" v-if="scope.row.status === 1"  @click="changeStatus(scope.row, 2)">收货</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+</template>
+
+<script>
+  var moment = require('moment');
+  import OrderFilter from '../components/filter.vue';
+  export default {
+    name: "list",
+    components: {
+      OrderFilter
+    },
+    asyncData({ store }) {
+      return store.dispatch('GET_ORDERS')
+    },
+    computed: {
+      tableData() {
+        return this.$store.state.orders;
+      }
+    },
+    methods: {
+      changeStatus(row, status) {
+        let current = moment().format('YYYY-MM-DD HH:mm:ss')
+        let key = status === 1 ? 'beginTime' : 'endTime';
+        let order = { status: status, [key]: current, uid: row.uid };
+        this.$store.dispatch('PATCH_ORDER', { id: row.objectId, order })
+      },
+      searchOrder(filter) {
+
+      }
+    }
+  }
+</script>
+
+<style scoped>
+    .el-button {
+        margin-left: 5px;
+    }
+</style>
