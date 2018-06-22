@@ -8,7 +8,7 @@ const BaasApi = axios.create({
 });
 
 const Leancloud = axios.create({
-  baseURL: 'https://leancloud.cn/1.1/classes',
+  baseURL: 'https://leancloud.cn/1.1/',
   headers: {'content-type': 'application/json', 'x-avoscloud-application-id': 'EH7ManYMmWabNvVqdhcbR80v-gzGzoHsz', 'x-avoscloud-application-key': 'rvFPtDK5IprxJ7rf83Oy51Jz' }
 });
 

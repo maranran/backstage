@@ -28,18 +28,23 @@ export function getLogistics(id) {
 
 
 export function addData(body) {
-  return Leancloud.post('/order', JSON.stringify(body));
+  return Leancloud.post('/classes/order', JSON.stringify(body));
 }
 export function getData(limit=10, skip=0, filter={}) {
-  return Leancloud.get(`/order?limit=${limit}&skip=${skip}&where=${encodeURIComponent(JSON.stringify(filter))}`);
+  return Leancloud.get(`/classes/order?limit=${limit}&skip=${skip}&where=${encodeURIComponent(JSON.stringify(filter))}`);
 }
 export function getCount() {
-  return Leancloud.get('/order?count=1&limit=0');
+  return Leancloud.get('/classes/order?count=1&limit=0');
 }
 export function getDetail(objectId) {
-  return Leancloud.get(`/order/${objectId}`);
+  return Leancloud.get(`/classes/order/${objectId}`);
 }
 
 export function patchData(objectId, body) {
-  return Leancloud.put(`/order/${objectId}`, JSON.stringify(body));
+  return Leancloud.put(`/classes/order/${objectId}`, JSON.stringify(body));
+}
+
+
+export function login({ username, password }) {
+  return Leancloud.get(`/users?username=${username}&password=${password}`);
 }

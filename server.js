@@ -3,6 +3,7 @@ const path = require('path')
 const LRU = require('lru-cache')
 const express = require('express')
 const compression = require('compression')
+const cookieParser = require('cookie-parser');
 const favicon = require('serve-favicon')
 const microcache = require('route-cache')
 
@@ -54,6 +55,7 @@ const serve = (path, cache) => express.static(resolve(path), {
   maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
 })
 app.use(compression({ threshold: 0 }))
+app.use(cookieParser());
 app.use(favicon('./public/logo-48.png'))
 app.use('/dist', serve('./dist', true))
 app.use('/public', serve('./public', true))
@@ -90,6 +92,11 @@ function render(req, res) {
      // console.error(err.stack)
     }
   }
+  // let url = req.cookies.hasLogin ? req.url : '/login';
+  // const context = {
+  //   title: 'My record',
+  //   url
+  // }
 
   const context = {
     title: 'My record',

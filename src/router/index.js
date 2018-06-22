@@ -4,6 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const Add = () => import('../views/pages/add.vue');
+const Login = () => import('../views/pages/login.vue');
 const Edit = () => import('../views/pages/edit.vue');
 const List = () => import('../views/pages/list.vue');
 const Detail = () => import('../views/pages/detail.vue');
@@ -15,6 +16,9 @@ export function createRouter() {
     fallback: false,
     scrollBehavior: () => ({ y: 0 }),
     routes: [
+      {
+        path: '/login',  component: Login
+      },
       {
         path: '/list', component: List
       },
@@ -36,3 +40,4 @@ export function createRouter() {
     ]
   })
 }
+

@@ -42,10 +42,18 @@
                     width="220"
             >
                 <template slot-scope="scope">
-                    <router-link :to="`/detail/${scope.row.objectId}`"><el-button  size="mini">查看</el-button></router-link>
-                    <router-link :to="`/edit/${scope.row.objectId}`"><el-button  size="mini">编辑</el-button></router-link>
-                    <el-button type="primary" size="mini" v-if="scope.row.status === 0" @click="changeStatus(scope.row, 1)">发货</el-button>
-                    <el-button type="success" size="mini" v-if="scope.row.status === 1"  @click="changeStatus(scope.row, 2)">收货</el-button>
+                    <router-link :to="`/detail/${scope.row.objectId}`">
+                        <el-button size="mini">查看</el-button>
+                    </router-link>
+                    <router-link :to="`/edit/${scope.row.objectId}`">
+                        <el-button size="mini">编辑</el-button>
+                    </router-link>
+                    <el-button type="primary" size="mini" v-if="scope.row.status === 0"
+                               @click="changeStatus(scope.row, 1)">发货
+                    </el-button>
+                    <el-button type="success" size="mini" v-if="scope.row.status === 1"
+                               @click="changeStatus(scope.row, 2)">收货
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -64,6 +72,8 @@
 <script>
   var moment = require('moment');
   import OrderFilter from '../components/filter.vue';
+  import { Cookie } from "src/utils";
+
   export default {
     name: "list",
     components: {
@@ -75,7 +85,7 @@
         currentPage: 1
       }
     },
-    asyncData({ store }) {
+    asyncData({store}) {
       return Promise.all([store.dispatch('GET_ORDERS', {}), store.dispatch('GET_ORDER_COUNT')])
     },
     computed: {
@@ -98,16 +108,18 @@
       changeStatus(row, status) {
         let current = moment().format('YYYY-MM-DD HH:mm:ss')
         let key = status === 1 ? 'beginTime' : 'endTime';
-        let order = { status: status, [key]: current, uid: row.uid };
-        this.$store.dispatch('PATCH_ORDER', { id: row.objectId, order })
+        let order = {status: status, [key]: current, uid: row.uid};
+        this.$store.dispatch('PATCH_ORDER', {id: row.objectId, order})
       },
       searchOrder(filter) {
-        let { limit, skip } = this;
-        let where = { ...filter }
+        let {limit, skip} = this;
+        let where = {...filter}
         Object.keys(where).forEach((key) => {
-          if (where[key] === '') { delete where[key] }
+          if (where[key] === '') {
+            delete where[key]
+          }
         });
-        this.$store.dispatch('GET_ORDERS', { limit, skip, where})
+        this.$store.dispatch('GET_ORDERS', {limit, skip, where})
       }
     }
   }

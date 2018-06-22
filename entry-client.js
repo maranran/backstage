@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { createApp } from "./src/app";
-
+import { createApp } from "src/app";
+import { Cookie } from "src/utils/index";
 
 Vue.mixin({
   beforeRouteUpdate(to, from, next) {
@@ -20,7 +20,12 @@ const { app, router, store } = createApp()
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__)
 }
-
+router.afterEach((to, from) => {
+  const hasLogin = Cookie.get('hasLogin');
+  if (!hasLogin && to.path != '/login') {
+    router.push('/login')
+  }
+})
 router.onReady(() => {
   router.beforeResolve((to, from, next) => {
     const matched = router.getMatchedComponents(to)
