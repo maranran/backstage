@@ -15,5 +15,8 @@ export default {
   },
   GET_ORDER_DETAIL: (state, data) => {
     state.orderDetail = data
+  },
+  GET_ORDER_COUNT: (state, data) => {
+    state.count = data
   }
 }

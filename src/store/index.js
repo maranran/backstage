@@ -10,6 +10,7 @@ export function createStore() {
   return new Vuex.Store({
     state: {
       orders: [],
+      count: 0,
       orderDetail: {}
     },
     actions,

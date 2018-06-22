@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h3>订单到哪儿了</h3>
-        <order-filter @search="searchOrder" ></order-filter>
+        <order-filter @search="searchOrder"></order-filter>
         <el-table
                 border
                 :data="tableData"
@@ -49,6 +49,14 @@
                 </template>
             </el-table-column>
         </el-table>
+        <p style="text-align: right">
+            <el-pagination
+                    layout="prev, pager, next"
+                    :total="dataCount"
+                    :current-page.sync="currentPage"
+            >
+            </el-pagination>
+        </p>
     </div>
 </template>
 
@@ -60,12 +68,29 @@
     components: {
       OrderFilter
     },
+    data() {
+      return {
+        limit: 10,
+        currentPage: 1
+      }
+    },
     asyncData({ store }) {
-      return store.dispatch('GET_ORDERS')
+      return Promise.all([store.dispatch('GET_ORDERS', {}), store.dispatch('GET_ORDER_COUNT')])
     },
     computed: {
       tableData() {
         return this.$store.state.orders;
+      },
+      dataCount() {
+        return this.$store.state.count;
+      },
+      skip() {
+        return (this.currentPage - 1) * this.limit;
+      }
+    },
+    watch: {
+      currentPage() {
+        this.searchOrder()
       }
     },
     methods: {
@@ -76,7 +101,12 @@
         this.$store.dispatch('PATCH_ORDER', { id: row.objectId, order })
       },
       searchOrder(filter) {
-
+        let { limit, skip } = this;
+        let where = { ...filter }
+        Object.keys(where).forEach((key) => {
+          if (where[key] === '') { delete where[key] }
+        });
+        this.$store.dispatch('GET_ORDERS', { limit, skip, where})
       }
     }
   }

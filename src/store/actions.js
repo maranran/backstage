@@ -2,12 +2,13 @@ import {
   getData,
   addData,
   patchData,
-  getDetail
+  getDetail,
+  getCount
 } from '../api';
 
 export default {
-  GET_ORDERS: ({ commit }) => {
-    return getData().then(({ data }) => commit('GET_ORDERS', data.results))
+  GET_ORDERS: ({ commit }, { limit=10, skip=0, where={} }) => {
+    return getData(limit, skip, where).then(({ data }) => commit('GET_ORDERS', data.results))
   },
   ADD_ORDER: ({ commit }, order) => {
     return addData(order).then(({ data }) => commit('ADD_ORDER', data))
@@ -17,5 +18,8 @@ export default {
   },
   GET_ORDER_DETAIL: ({ commit }, id) => {
     return getDetail(id).then(({ data }) => commit('GET_ORDER_DETAIL', data))
+  },
+  GET_ORDER_COUNT: ({ commit } ) => {
+    return getCount().then(({ data }) => commit('GET_ORDER_COUNT', data.count))
   },
 }
