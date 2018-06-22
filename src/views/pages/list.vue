@@ -51,6 +51,7 @@
         </el-table>
         <p style="text-align: right">
             <el-pagination
+                    background
                     layout="prev, pager, next"
                     :total="dataCount"
                     :current-page.sync="currentPage"
