@@ -2,7 +2,7 @@
     <div class="container login">
         <el-form  :model="filter" label-width="80px">
             <el-form-item label="用户名">
-                <el-input v-model="filter.username" placeholder="收件人"></el-input>
+                <el-input v-model="filter.username" placeholder="用户名"></el-input>
             </el-form-item>
             <el-form-item label="输入密码">
                 <el-input v-model="filter.password" placeholder="密码"></el-input>

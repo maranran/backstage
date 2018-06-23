@@ -23,6 +23,9 @@
             <span>收货日期：</span><span>{{ order.endTime }}</span>
         </p>
         <p>
+            <span>快递公司：</span><span>{{ getExpressName(order.express) }}</span>
+        </p>
+        <p>
             <span>快递单号：</span><span>{{ order.orderId }}</span>
         </p>
         <div v-if="order.orderId">
@@ -36,6 +39,8 @@
 
 <script>
   import { getLogistics } from 'src/api'
+  import { getExpressName } from "../../utils";
+
   var moment = require('moment');
   export default {
     name: "add",
@@ -53,7 +58,7 @@
       }
     },
     mounted() {
-      getLogistics(this.order.orderId).then(({ data }) => {
+      getLogistics(this.order.express, this.order.orderId).then(({ data }) => {
         this.logisticsInfo = data.data.info.context
       })
     },
@@ -63,7 +68,8 @@
       },
       setLogisticsInfo(data) {
         this.logisticsInfo = data.info.context
-      }
+      },
+      getExpressName
     }
   }
 </script>

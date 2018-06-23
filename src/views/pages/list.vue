@@ -24,6 +24,13 @@
             >
             </el-table-column>
             <el-table-column
+                    label="快递公司"
+            >
+                <template slot-scope="scope">
+                    {{ getExpressName(scope.row.express) }}
+                </template>
+            </el-table-column>
+            <el-table-column
                     prop="orderId"
                     label="快递单号"
             >
@@ -72,7 +79,7 @@
 <script>
   var moment = require('moment');
   import OrderFilter from '../components/filter.vue';
-  import { Cookie } from "src/utils";
+  import { Cookie, getExpressName } from "src/utils";
 
   export default {
     name: "list",
@@ -120,7 +127,8 @@
           }
         });
         this.$store.dispatch('GET_ORDERS', {limit, skip, where})
-      }
+      },
+      getExpressName
     }
   }
 </script>

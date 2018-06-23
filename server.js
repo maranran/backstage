@@ -64,9 +64,10 @@ app.use('/public', serve('./public', true))
 
 //app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl)) // 用户无关页面 缓存
 const axios = require('axios');
-app.get('/api/logistics/:id', (req, res)=> {
+app.get('/api/logistics/:com/:id', (req, res)=> {
   let id = req.params.id;
-  axios.get(`http://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?appid=4001&com=yunda&nu=${id}`, {
+  let com = req.params.com;
+  axios.get(`http://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?appid=4001&com=${com}&nu=${id}`, {
     headers: {'Cookie': 'BAIDUID=05A7039841B6502514BFB0DF4EC4902D:FG=1; BIDUPSID=05A7039841B6502514BFB0DF4EC4902D; PSTM=1525675491; BDSFRCVID=TJtsJeC62rO7_jn7QUR5rF5FmcZX42TTH6ao-vcxd4ys09yHLJJgEG0PqM8g0Ku-H2QCogKK0eOTH65P; H_BDCLCKID_SF=tJIt_D_2tCL3j4JIKITS2J8j-fQK5D62aJ3tMhvbWJ5TMCo4Mbjvy4IFK-6lBRjlJmcL0-Os2tL5ShPC-tnhLxIXDMcx-Mng-GcRoPcI3l02Vhb9e-t2ynLVDtTmXPRMW20jWl7mWILhVKFljTuae55yepJf-K6hKCoMsJOOaCvSbqTRy4oTLnk1DNu8LhDfQK7j_CJEtqR8sbobeMQ0WxbXL44eBjIHJRFHVCL5JKv8J5rph46hMPQH-UnLqbJHW57Z0l8Ktq3xStOp0jJR-UF9K4Dt0trMWJcbK-omWIQHDILGb-QDQpoQ-n5fQMvzMHr4KKJx2JLWeIJo5tKahfL8hUJiB5OLBan7_D5xfDDaMKPGe5D3KPk_hxJ354FXKCoBLRvHHJOoDDvdjMQ5y4LdjGKJ--uO3GPf-bOYfPoPMqQz3hAV0h_p3-Aq54R32enWLnL5JtTA8f3c-jbdQfbQ0hQPqP-jW5IL-qoXWJ7JOpkxhfnxy5500aCHJ6KOJnCtV-nVatJHD6ru2470qRIqhUkX5-RLHD7XVMbFbPOkeq8CDR5cjp4qhGJILlDt-eFtKJ6JyfPMhxb2y5jHhIuB-p7btncetn58apRFWJ3psIJMKfFWbT8U5ec7JqomaKviaKJHBMb1MC5Me4bK-TrBja0DqUK; BDUSS=1uRVhWV2F1OGprSEF0eTZtQWNzenlSMk9MVDYtVm9tZGJkUDFkZDZTNEc3RVZiQUFBQUFBJCQAAAAAAAAAAAEAAABVGyixxqS~qMfwsb7X8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZfHlsGXx5bMS; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; MCITY=-%3A; BDRCVFR[feWj1Vr5u3D]=I67x6TjHwwYf0; PSINO=5; H_PS_PSSID=1436_25810_26458_21119_20698_20929'},
   })
     .then(({ data }) => {

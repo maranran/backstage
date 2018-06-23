@@ -21,8 +21,8 @@ var urlencode = require('urlencode');
 //   const query = JSON.stringify({uid})
 //   return BaasApi.get(`/tables/order?appId=${baasConfig.appId}&query=${query}`);
 // }
-export function getLogistics(id) {
-  return axios.get(`/api/logistics/${id}`)
+export function getLogistics(express, id) {
+  return axios.get(`/api/logistics/${express}/${id}`)
 }
 
 
@@ -31,7 +31,7 @@ export function addData(body) {
   return Leancloud.post('/classes/order', JSON.stringify(body));
 }
 export function getData(limit=10, skip=0, filter={}) {
-  return Leancloud.get(`/classes/order?limit=${limit}&skip=${skip}&where=${encodeURIComponent(JSON.stringify(filter))}`);
+  return Leancloud.get(`/classes/order?limit=${limit}&skip=${skip}&where=${encodeURIComponent(JSON.stringify(filter))}&order=status`);
 }
 export function getCount() {
   return Leancloud.get('/classes/order?count=1&limit=0');

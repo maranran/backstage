@@ -14,6 +14,12 @@
             <el-form-item label="物品清单">
                 <el-input v-model="order.good" placeholder="物品清单"></el-input>
             </el-form-item>
+            <el-form-item label="快递公司">
+                <el-select v-model="order.express" placeholder="快递公司">
+                    <el-option label="暂无" value=""></el-option>
+                    <el-option :label="item.label" :key="item.value" :value="item.value" v-for="item in expressCom"></el-option>
+                </el-select>
+            </el-form-item>
             <el-form-item label="快递单号">
                 <el-input v-model="order.orderId" placeholder="快递单"></el-input>
             </el-form-item>
@@ -29,11 +35,13 @@
 
 <script>
   const uuidv4 = require('uuid/v4');
+  import { expressCom } from 'src/config';
   export default {
     name: "add",
     data() {
       return {
-        oldOrder: {}
+        oldOrder: {},
+        expressCom: expressCom
       }
     },
     asyncData({ store, route }) {

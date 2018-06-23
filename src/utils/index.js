@@ -1,3 +1,4 @@
+import { expressMap } from 'src/config'
 export const Cookie = {
   get (name) {
     const cookie = document.cookie
@@ -11,4 +12,8 @@ export const Cookie = {
     let cookieStr = `${name}=${value};expires=${expire === null ? exdate.toUTCString() : expire};path=/;domain=${window.document.domain}`
     document.cookie = cookieStr
   }
+}
+
+export function getExpressName(name) {
+  return expressMap[name] || '暂无'
 }
