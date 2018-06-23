@@ -26,6 +26,9 @@
             <span>快递公司：</span><span>{{ getExpressName(order.express) }}</span>
         </p>
         <p>
+            <span>客服电话：</span><span>{{ getExpressPhone(order.express) }}</span>
+        </p>
+        <p>
             <span>快递单号：</span><span>{{ order.orderId }}</span>
         </p>
         <div v-if="order.orderId">
@@ -39,7 +42,7 @@
 
 <script>
   import { getLogistics } from 'src/api'
-  import { getExpressName } from "../../utils";
+  import { getExpressName, getExpressPhone } from "../../utils";
 
   var moment = require('moment');
   export default {
@@ -69,7 +72,8 @@
       setLogisticsInfo(data) {
         this.logisticsInfo = data.info.context
       },
-      getExpressName
+      getExpressName,
+      getExpressPhone
     }
   }
 </script>
