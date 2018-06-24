@@ -15,8 +15,10 @@ export const Cookie = {
 }
 
 export function getExpressName(name) {
-  return expressMap[name].label || '暂无'
+  const express = expressMap[name] || {};
+  return express.label || '暂无'
 }
 export function getExpressPhone(name) {
-  return expressMap[name].phone || '暂无'
+  const express = expressMap[name] || {};
+  return express.phone || '暂无'
 }

@@ -8,8 +8,12 @@ export let expressMap = {
     phone: 95546
   },
   'shentong': {
-    label: '韵达',
+    label: '申通',
     phone: 95543
+  },
+  'tiantian': {
+    label: '天天',
+    phone: '400-188-8888'
   }
 }
 

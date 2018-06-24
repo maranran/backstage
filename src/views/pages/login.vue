@@ -5,7 +5,7 @@
                 <el-input v-model="filter.username" placeholder="用户名"></el-input>
             </el-form-item>
             <el-form-item label="输入密码">
-                <el-input v-model="filter.password" placeholder="密码"></el-input>
+                <el-input v-model="filter.password" placeholder="密码" type="password"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="success" @click="searchUser()">登录</el-button>
