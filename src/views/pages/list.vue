@@ -127,6 +127,7 @@
           }
         });
         this.$store.dispatch('GET_ORDERS', {limit, skip, where})
+        this.$store.dispatch('GET_ORDER_COUNT', where)
       },
       getExpressName
     }

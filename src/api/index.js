@@ -33,8 +33,8 @@ export function addData(body) {
 export function getData(limit=10, skip=0, filter={}) {
   return Leancloud.get(`/classes/order?limit=${limit}&skip=${skip}&where=${encodeURIComponent(JSON.stringify(filter))}&order=status`);
 }
-export function getCount() {
-  return Leancloud.get('/classes/order?count=1&limit=0');
+export function getCount(filter={}) {
+  return Leancloud.get(`/classes/order?count=1&limit=0&where=${encodeURIComponent(JSON.stringify(filter))}`);
 }
 export function getDetail(objectId) {
   return Leancloud.get(`/classes/order/${objectId}`);

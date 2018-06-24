@@ -19,7 +19,7 @@ export default {
   GET_ORDER_DETAIL: ({ commit }, id) => {
     return getDetail(id).then(({ data }) => commit('GET_ORDER_DETAIL', data))
   },
-  GET_ORDER_COUNT: ({ commit } ) => {
-    return getCount().then(({ data }) => commit('GET_ORDER_COUNT', data.count))
+  GET_ORDER_COUNT: ({ commit }, filter={} ) => {
+    return getCount(filter).then(({ data }) => commit('GET_ORDER_COUNT', data.count))
   },
 }
