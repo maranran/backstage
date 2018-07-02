@@ -80,6 +80,7 @@
   var moment = require('moment');
   import OrderFilter from '../components/filter.vue';
   import { Cookie, getExpressName } from "src/utils";
+  import { defaultFilter } from 'src/config'
 
   export default {
     name: "list",
@@ -93,7 +94,7 @@
       }
     },
     asyncData({store}) {
-      return Promise.all([store.dispatch('GET_ORDERS', {}), store.dispatch('GET_ORDER_COUNT')])
+      return Promise.all([store.dispatch('GET_ORDERS', { where: defaultFilter }), store.dispatch('GET_ORDER_COUNT', defaultFilter)])
     },
     computed: {
       tableData() {

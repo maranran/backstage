@@ -16,7 +16,9 @@ export let expressMap = {
     phone: '400-188-8888'
   }
 }
-
+export let defaultFilter = {
+  status: 1
+}
 export let expressCom = (() => {
   let express = []
   for (let value in expressMap) {

@@ -25,14 +25,12 @@
 </template>
 
 <script>
+  import { defaultFilter } from 'src/config'
   export default {
     name: "order-filter",
     data() {
       return {
-        filter: {
-          user: '',
-          status: ''
-        }
+        filter: { user: '', ...defaultFilter }
       }
     },
     methods: {
