@@ -33,7 +33,7 @@
         </p>
         <div v-if="order.orderId">
             <h4>物流信息：</h4>
-            <p v-for="item in logisticsInfo">
+            <p v-for="item in logisticsInfo" :key="item.time">
                 <span class="time">{{ parseTime(item.time) }}</span><span>{{ item.desc }}</span>
             </p>
         </div>

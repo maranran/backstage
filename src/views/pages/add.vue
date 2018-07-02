@@ -58,6 +58,9 @@
     },
     methods: {
       addOrder() {
+        if (this.order.orderId) {
+          this.order.status = 1;
+        }
         this.$store.dispatch('ADD_ORDER', this.order).then(() => {
           this.$router.push('/list')
         })

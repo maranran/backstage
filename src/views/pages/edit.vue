@@ -67,6 +67,9 @@
         return result
       },
       editOrder() {
+        if (this.order.orderId) {
+          this.order.status = 1;
+        }
         let order = this.diffObj(this.oldOrder, this.order);
         order.uid = this.order.uid;
         this.$store.dispatch('PATCH_ORDER', { id: this.order.objectId, order }).then(() => {
