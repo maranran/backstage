@@ -14,10 +14,26 @@ export let expressMap = {
   'tiantian': {
     label: '天天',
     phone: '400-188-8888'
-  }
+  },
+  'annengwuliu': {
+    label: '安能',
+    phone: '400-104-0088'
+  },
+  'zhaijisong': {
+    label: '宅急送',
+    phone: '400-6789-000'
+  },
+  'huitongkuaidi': {
+    label: '百世',
+    phone: '95320'
+  },
+  'youshuwuliu': {
+    label: '优速',
+    phone: '95320'
+  },
 }
 export let defaultFilter = {
-  status: 1
+  // status: 1
 }
 export let expressCom = (() => {
   let express = []

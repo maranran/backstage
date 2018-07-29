@@ -8,7 +8,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    'plugin:vue-a11y/base',
+    'plugin:vue-a11y/recommended',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
    // 'standard'
   ],
