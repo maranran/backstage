@@ -91,11 +91,11 @@
       return {
         limit: 10,
         currentPage: 1,
-        filter: defaultFilter
+        filter: {}
       }
     },
     asyncData({store}) {
-      return Promise.all([store.dispatch('GET_ORDERS', { where: this.filter }), store.dispatch('GET_ORDER_COUNT', defaultFilter)])
+      return Promise.all([store.dispatch('GET_ORDERS', { where: defaultFilter }), store.dispatch('GET_ORDER_COUNT', defaultFilter)])
     },
     computed: {
       tableData() {
@@ -123,7 +123,7 @@
       searchOrder(filter) {
         let {limit, skip} = this;
         this.filter = filter;
-        let where = {...filter}
+        let where = {...filter} || {}
         Object.keys(where).forEach((key) => {
           if (where[key] === '') {
             delete where[key]
